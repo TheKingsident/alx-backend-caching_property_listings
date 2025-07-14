@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property Listings</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .property { border: 1px solid #ddd; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .property h3 { color: #333; margin-top: 0; }
+        .price { color: green; font-weight: bold; font-size: 1.2em; }
+        .location { color: #666; }
+        .description { margin: 10px 0; }
+        .no-properties { text-align: center; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Property Listings</h1>
+    <p><em>This page is cached for 15 minutes using Redis</em></p>
+    
+    {% if properties %}
+        {% for property in properties %}
+            <div class="property">
+                <h3>{{ property.title }}</h3>
+                <p class="price">${{ property.price }}</p>
+                <p class="location">📍 {{ property.location }}</p>
+                <p class="description">{{ property.description }}</p>
+                <p><small>Listed on: {{ property.created_at|date:"F d, Y" }}</small></p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-properties">No properties available at the moment.</p>
+    {% endif %}
+</body>
+</html>
